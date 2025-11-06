@@ -27,7 +27,7 @@ function AnimatedCounter({ target, suffix = "" }) {
 export default function CounterSection() {
   return (
     <section className="relative w-full">
-      {/* Background Image */}
+
        {/* Background Image */}
   <div className="absolute inset-0">
     <img
@@ -35,8 +35,8 @@ export default function CounterSection() {
       alt="Background"
       className="w-full h-full object-cover"
     />
-    {/* Purple Overlay */}
-    <div className="absolute inset-0 bg-purple-700/70"></div>
+    {/* red Overlay */}
+    <div className="absolute inset-0 bg-[#c82949]/70"></div>
   </div>
 
       {/* Counters Content */}

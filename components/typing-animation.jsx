@@ -22,11 +22,12 @@ export function TypingAnimation({ text, speed = 20 }) {
   }, [text, speed])
 
   return (
-    <div className="whitespace-pre-wrap text-foreground font-medium leading-relaxed">
-      {displayedText}
-      {displayedText !== text && (
-        <span className="ml-1 inline-block w-2 h-6 bg-[#8b3dff] animate-pulse" />
-      )}
-    </div>
+    <div className="whitespace-pre-wrap font-medium leading-relaxed text-[#ffff]">
+  {displayedText}
+  {displayedText !== text && (
+    <span className="ml-1 inline-block w-2 h-6 bg-[#c82949] animate-pulse" />
+  )}
+</div>
+
   )
 }

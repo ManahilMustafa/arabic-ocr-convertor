@@ -15,7 +15,7 @@ const features = [
   {
     title: "Key Features",
     icon: Zap,
-    color: "#8b3dff",
+    color: "#c82949",
     items: [
       "Batch upload multiple notes",
       "Real-time OCR conversion",
@@ -28,7 +28,7 @@ const features = [
   {
     title: "Perfect For",
     icon: PenTool,
-    color: "#8b3dff",
+    color: "#c82949",
     items: [
       "Students organizing notes",
       "Professionals digitizing meetings",
@@ -69,7 +69,7 @@ export function HowToSection() {
   }, [])
 
   return (
-    <section className="w-full bg-background">
+    <section className="w-full bg-white">
       <div className="max-w-6xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -90,12 +90,12 @@ export function HowToSection() {
                 }`}
                 style={{ transitionDelay: `${index * 0.15}s` }}
               >
-                <Card className="p-6 h-full flex flex-col shadow-none hover:shadow-md hover:border-[#8b3dff]/30 transition-all duration-500">
-                  <div className="p-2.5 rounded-lg bg-[#8b3dff]/10 w-fit mb-4">
-                    <IconComponent className="w-5 h-5 text-[#8b3dff]" />
+                <Card className="p-6 h-full flex flex-col shadow-none hover:shadow-md hover:border-[#c82949]/30 transition-all duration-500">
+                  <div className="p-2.5 rounded-lg bg-[#c82949]/10 w-fit mb-4">
+                    <IconComponent className="w-5 h-5 text-[#c82949]" />
                   </div>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#8b3dff]/20 text-[#8b3dff] text-xs font-bold">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#c82949]/20 text-[#c82949] text-xs font-bold">
                       {index + 1}
                     </span>
                     <h3 className="font-semibold text-sm">{step.title}</h3>
@@ -122,7 +122,7 @@ export function HowToSection() {
         style={{ transitionDelay: `${index * 0.15 + 0.3}s` }}
       >
         <Card
-          className={`p-6 shadow-none transition-all duration-500 bg-gradient-to-br from-secondary/5 to-[#8b3dff]/5 border-secondary/20`}
+          className={`p-6 shadow-none transition-all duration-500 bg-gradient-to-br from-white to-[#c82949]/5 `}
         >
           <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
             <IconComponent className="w-5 h-5" style={{ color: feature.color }} />
@@ -135,7 +135,7 @@ export function HowToSection() {
                   className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
                   style={{ backgroundColor: feature.color }}
                 />
-                <span className="text-foreground leading-relaxed">{item}</span>
+                <span className="text-muted-foreground leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>

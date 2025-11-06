@@ -138,86 +138,66 @@ export function ConversionSection() {
 
         {/* ✅ UPLOAD FULL WIDTH */}
         <div className="w-full mb-6">
-          <Card
-            className="p-6 border-2 border-dashed border-[#8b3dff] hover:border-[#8b3dff]/50 transition-smooth cursor-pointer"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <Input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
+      
+<div className="w-full mb-6">
+  <div className="flex items-center justify-center">
+    <div className="flex items-center w-full max-w-2xl bg-white rounded-full border border-[#c82949] px-4 h-12 shadow-sm">
 
-            <div className="flex flex-col items-center justify-center py-10 text-center">
-              <div className="p-3 rounded-lg bg-[#8b3dff]/10 mb-3">
-                <Upload className="w-6 h-6 text-[#8b3dff]" />
-              </div>
-              <h3 className="font-semibold text-sm mb-1">Upload Images</h3>
-              <p className="text-xs text-muted-foreground mb-3">
-                Drag & drop or click to browse
-              </p>
-              <Button size="sm" className="text-xs h-8 bg-[#8b3dff] hover:bg-muted hover:text-black">
-                Select Files
-              </Button>
-            </div>
-          </Card>
+      <button
+        onClick={() => fileInputRef.current?.click()}
+        className="text-[#c82949] hover:opacity-70"
+      >
+        <Upload className="w-5 h-5" />
+      </button>
 
-          {/* Uploaded Images List */}
-          {images.length > 0 && (
-            <div className="mt-4 space-y-2">
-              <p className="text-xs font-medium text-muted-foreground px-1">
-                Uploaded ({images.length})
-              </p>
-              <div className="max-h-72 overflow-y-auto space-y-2">
-                {images.map((img) => (
-                  <button
-                    key={img.id}
-                    onClick={() => setSelectedImageId(img.id)}
-                    className={`w-full p-3 rounded-lg border transition-all text-left text-xs group ${
-                      selectedImageId === img.id
-                        ? "border-[#8b3dff] bg-[#8b3dff]/5 shadow-sm"
-                        : "border-border hover:border-[#8b3dff]/30"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="relative w-8 h-8 rounded overflow-hidden flex-shrink-0">
-                        <img
-                          src={img.preview || "/placeholder.svg"}
-                          alt="Note"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-xs truncate">
-                          {img.file.name.substring(0, 16)}
-                        </p>
-                        {img.isConverting ? (
-                          <div className="flex items-center gap-1 text-[#8b3dff] text-xs">
-                            <Loader className="w-2.5 h-2.5 animate-spin" />
-                            Converting...
-                          </div>
-                        ) : (
-                          <p className="text-xs text-muted-foreground">Ready</p>
-                        )}
-                      </div>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleRemoveImage(img.id)
-                        }}
-                        className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        <X className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+      <Input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={handleFileUpload}
+        className="hidden"
+      />
+
+      <span className="flex-1 text-xs text-muted-foreground px-3 truncate">
+        Upload images to convert...
+      </span>
+
+    </div>
+  </div>
+</div>
+
+
+         {/* ✅ Uploaded Images RIGHT ABOVE Upload bar like GPT */}
+{images.length > 0 && (
+  <div className="flex flex-wrap gap-2 justify-center mb-3 max-w-2xl mx-auto">
+    {images.map((img) => (
+      <div
+        key={img.id}
+        onClick={() => setSelectedImageId(img.id)}
+        className={`flex items-center gap-2 px-3 py-1.5 border rounded-full text-xs cursor-pointer transition ${
+          selectedImageId === img.id
+            ? "border-[#c82949] bg-[#c82949]/10 text-white"
+            : "border-gray-300 bg-white hover:bg-gray-50"
+        }`}
+      >
+        <img src={img.preview} className="w-5 h-5 rounded-full object-cover" />
+        <span className="truncate max-w-[80px]">{img.file.name.substring(0, 10)}</span>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            handleRemoveImage(img.id)
+          }}
+          className="text-gray-500 hover:text-red-500"
+        >
+          <X className="w-3 h-3" />
+        </button>
+      </div>
+    ))}
+  </div>
+)}
+
         </div>
 
         {/* ✅ CONVERTED TEXT BELOW UPLOAD */}
@@ -228,12 +208,12 @@ export function ConversionSection() {
                 {selectedImage.isConverting ? (
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                      <Loader className="w-3.5 h-3.5 text-[#8b3dff] animate-spin" />
+                      <Loader className="w-3.5 h-3.5 text-[#c82949] animate-spin" />
                       Converting...
                     </p>
-                    <Card className="p-6 bg-muted/30 border border-border h-40 flex items-center justify-center">
+                    <Card className="p-6 bg-muted/30 border border-[#c82949] h-40 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="w-6 h-6 border-2 border-[#8b3dff]/20 border-t-[#8b3dff] rounded-full animate-spin mx-auto mb-2" />
+                        <div className="w-6 h-6 border-2 border-[#c82949]/20 border-t-[#c82949] rounded-full animate-spin mx-auto mb-2" />
                         <p className="text-xs text-muted-foreground">OCR in progress...</p>
                       </div>
                     </Card>
@@ -255,7 +235,7 @@ export function ConversionSection() {
                           <Button
                             size="sm"
                             onClick={() => handleSaveEdit(selectedImage.id)}
-                            className="flex-1 gap-2 text-xs h-9 bg-[#8b3dff] text-white hover:bg-muted hover:text-black"
+                            className="flex-1 gap-2 text-xs h-9 bg-[#c82949] text-white hover:bg-muted hover:text-black"
                           >
                             <Check className="w-3.5 h-3.5" />
                             Save Changes
@@ -264,7 +244,7 @@ export function ConversionSection() {
                             size="sm"
                             variant="outline"
                             onClick={() => handleCancelEdit(selectedImage.id)}
-                            className="flex-1 text-xs h-9 hover:bg-[#8b3dff]"
+                            className="flex-1 text-xs h-9 hover:bg-[#c82949]"
                           >
                             Cancel
                           </Button>
@@ -273,11 +253,9 @@ export function ConversionSection() {
                     ) : (
                       <>
                         <div className="space-y-2">
-                          <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                            <FileText className="w-3.5 h-3.5 text-[#8b3dff]" />
-                            Converted Text
-                          </p>
-                          <Card className="p-4 bg-muted/30 border border-border min-h-32 max-h-72 resize-y overflow-auto">
+                        
+                         <Card className="p-4 bg-muted/30 border border-white/30 min-h-32 max-h-72 resize-y overflow-auto max-w-2xl mx-auto bg-white/20 ">
+
                             {selectedImage.text ? (
                               <TypingAnimation text={selectedImage.text} />
                             ) : (
@@ -288,7 +266,8 @@ export function ConversionSection() {
                           </Card>
                         </div>
 
-                        <div className="flex gap-2 pt-2">
+                       <div className="flex gap-2 pt-2 max-w-2xl mx-auto">
+
                           <Button
                             size="sm"
                             variant="outline"
@@ -297,12 +276,12 @@ export function ConversionSection() {
                           >
                             {copied ? (
                               <>
-                                <Check className="w-3.5 h-3.5 text-[#8b3dff]" />
+                                <Check className="w-3.5 h-3.5 text-[#c82949]" />
                                 Copied
                               </>
                             ) : (
                               <>
-                                <Copy className="w-3.5 h-3.5 text-[#8b3dff]" />
+                                <Copy className="w-3.5 h-3.5 text-[#c82949]" />
                                 Copy
                               </>
                             )}
@@ -314,7 +293,7 @@ export function ConversionSection() {
                             onClick={() => handleEdit(selectedImage.id)}
                             className="flex-1 gap-1.5 text-xs h-9 bg-white hover:bg-muted hover:text-black"
                           >
-                            <Edit2 className="w-3.5 h-3.5  text-[#8b3dff]" />
+                            <Edit2 className="w-3.5 h-3.5  text-[#c82949]" />
                             Edit
                           </Button>
 
@@ -322,7 +301,7 @@ export function ConversionSection() {
                             <Button
                               size="sm"
                               onClick={() => setShowExportOptions(!showExportOptions)}
-                              className="gap-1.5 text-xs h-9 px-3 bg-[#8b3dff] hover:bg-muted hover:text-black"
+                              className="gap-1.5 text-xs h-9 px-3 bg-[#c82949] hover:bg-muted hover:text-black"
                             >
                               <Download className="w-3.5 h-3.5" />
                               Export
