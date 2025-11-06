@@ -31,7 +31,7 @@ function ZigzagItem({ heading, subheading, imgSrc, reverse }) {
         } md:pr-8 md:pl-8`}
       >
         <h2 className="text-3xl font-bold mb-4">{heading}</h2>
-        <p className="text-gray-600">{subheading}</p>
+        <p className="text-gray-500 sm:text-md ">{subheading}</p>
       </div>
       <div
         className={`md:w-1/2 mt-6 md:mt-0 transition-all duration-700 ${
@@ -66,14 +66,14 @@ export function ZigzagSection() {
   ];
 
   return (
-    <div className="space-y-20 bg-gray-100">
+    <div className="space-y-20 bg-gray-50">
       {sections.map((item, index) => (
         <ZigzagItem
           key={index}
           heading={item.heading}
           subheading={item.subheading}
           imgSrc={item.imgSrc}
-          reverse={index % 2 !== 0} // alternate layout
+          reverse={index % 2 !== 0} 
         />
       ))}
     </div>

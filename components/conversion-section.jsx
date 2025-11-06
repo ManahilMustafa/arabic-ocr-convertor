@@ -141,15 +141,9 @@ export function ConversionSection() {
       
 <div className="w-full mb-6">
   <div className="flex items-center justify-center">
-    <div className="flex items-center w-full max-w-2xl bg-white rounded-full border border-[#c82949] px-4 h-12 shadow-sm">
+    <div className="flex items-center w-full max-w-2xl bg-white rounded-full border border-[#c82949] px-4 h-12 shadow-sm justify-between">
 
-      <button
-        onClick={() => fileInputRef.current?.click()}
-        className="text-[#c82949] hover:opacity-70"
-      >
-        <Upload className="w-5 h-5" />
-      </button>
-
+      {/* Hidden File Input */}
       <Input
         ref={fileInputRef}
         type="file"
@@ -159,13 +153,24 @@ export function ConversionSection() {
         className="hidden"
       />
 
+      {/* Left Placeholder Text */}
       <span className="flex-1 text-xs text-muted-foreground px-3 truncate">
         Upload images to convert...
       </span>
 
+      {/* ✅ Right Side Upload Button */}
+      <button
+        onClick={() => fileInputRef.current?.click()}
+        className="flex items-center gap-1 bg-[#c82949] text-white text-xs font-medium px-4 py-2 rounded-full hover:opacity-90 transition"
+      >
+        <Upload className="w-4 h-4" />
+        Upload
+      </button>
+
     </div>
   </div>
 </div>
+
 
 
          {/* ✅ Uploaded Images RIGHT ABOVE Upload bar like GPT */}

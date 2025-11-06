@@ -45,21 +45,21 @@ export default function CounterSection() {
           <h2 className="text-5xl font-bold">
             <AnimatedCounter target={10000} suffix="+" />
           </h2>
-          <p className="mt-2 text-xl">Pages Processed</p>
+          <p className="mt-2 sm:text-md ">Pages Processed</p>
         </div>
 
         <div>
           <h2 className="text-5xl font-bold">
             <AnimatedCounter target={40000} suffix="+" />
           </h2>
-          <p className="mt-2 text-xl">Registered Users</p>
+          <p className="mt-2 sm:text-md ">Registered Users</p>
         </div>
 
         <div>
           <h2 className="text-5xl font-bold">
             <AnimatedCounter target={50} suffix="+" />
           </h2>
-          <p className="mt-2 text-xl">Free Public AI Models</p>
+          <p className="mt-2 sm:text-md ">Free Public AI Models</p>
         </div>
       </div>
     </section>

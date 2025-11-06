@@ -95,10 +95,10 @@ export function HowToSection() {
                     <IconComponent className="w-5 h-5 text-[#c82949]" />
                   </div>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#c82949]/20 text-[#c82949] text-xs font-bold">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full  text-[#c82949] text-xs font-bold">
                       {index + 1}
                     </span>
-                    <h3 className="font-semibold text-sm">{step.title}</h3>
+                    <h3 className="font-semibold text-sm ml-[-5px]">{step.title}</h3>
                   </div>
                   <p className="text-muted-foreground text-xs leading-relaxed flex-1">{step.description}</p>
                 </Card>
