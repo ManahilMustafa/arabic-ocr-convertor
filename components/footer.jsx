@@ -4,9 +4,14 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="font-semibold text-foreground mb-4">Arabic OCR</h4>
+          <img 
+  src="/black-logo.png" 
+  alt="Alif OCR Logo" 
+  className="h-8 w-auto mb-4"
+/>
+
             <p className="text-sm text-muted-foreground">
-              Transform your handwritten notes into digital text with AI power.
+              Transform your handwritten notes into digital text and documents with AI power.
             </p>
           </div>
           <div>
@@ -66,11 +71,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border">
-          <p className="text-center text-sm text-muted-foreground">
-            © 2025 Arabic OCR. All rights reserved.
-          </p>
-        </div>
+       <div className="pt-8 border-t border-border">
+  <div className="flex flex-wrap justify-between items-center text-sm text-muted-foreground gap-2">
+    <p>© 2025 Alif OCR. All rights reserved.</p>
+    <p>Powered by Cplus Soft</p>
+  </div>
+</div>
+
       </div>
     </footer>
   )

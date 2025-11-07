@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
-          <title>Arabic-OCR</title>
+          <title>Alif-OCR</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

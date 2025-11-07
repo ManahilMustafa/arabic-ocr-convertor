@@ -53,20 +53,22 @@ export function ZigzagSection() {
   {
     heading: "How Arabic OCR Works",
     subheading:
-      "Arabic OCR (Optical Character Recognition) uses advanced AI models to recognize and digitize Arabic handwritten and printed text. Transkribus can be trained on historical Arabic manuscripts, modern handwritten notes, or scanned documents to accurately convert them into editable text. The 'Universal Arabic' model, for example, has been trained on millions of words from diverse Arabic scripts, enabling it to read different calligraphy styles and handwriting nuances.",
+      "Arabic OCR (Optical Character Recognition) uses advanced AI technology to read, understand, and convert handwritten or printed Arabic text into digital, editable content. Transkribus can be trained on historical manuscripts, modern handwritten notes, and scanned documents, making it highly accurate for different writing styles. The Universal Arabic model has been trained on millions of words from various Arabic scripts, allowing it to recognize different calligraphic styles, handwriting patterns, and complex letter shapes with impressive accuracy.",
     imgSrc: "/editor.jpg",
   },
   {
     heading: "Understanding Arabic Handwriting",
     subheading:
-      "Arabic handwriting varies greatly in style, including Naskh, Ruq'ah, Diwani, and Thuluth scripts. OCR systems for Arabic need to account for connected letters, diacritics, and right-to-left text flow. With Transkribus, historical manuscripts and modern Arabic texts can be digitized efficiently, preserving the text's accuracy and style while making it searchable and editable.",
+   
+
+"Arabic handwriting comes in many styles—such as Naskh, Ruq'ah, Diwani, and Thuluth—each with unique shapes and stroke patterns. Unlike English, Arabic letters change form depending on their position in a word and are written right-to-left, with added diacritics for pronunciation. Because of these complexities, Arabic OCR systems must be highly intelligent to accurately read and convert handwritten text. With Transkribus, both historical manuscripts and modern handwritten Arabic notes can be digitized efficiently—preserving accuracy, style, and making the text fully searchable and editable.",
     imgSrc: "/editor.jpg",
   },
 
   ];
 
   return (
-    <div className="space-y-20 bg-gray-50">
+    <div className="space-y-20 bg-[#f9f9fa] ">
       {sections.map((item, index) => (
         <ZigzagItem
           key={index}

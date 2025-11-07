@@ -6,7 +6,10 @@ import { ConversionSection } from "./conversion-section"
 export function HeroSection() {
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-background pt-20 pb-20">
-
+ {/* ✅ LOGO - CENTER ON MOBILE */}
+  <div className="absolute top-6 left-1/2 -translate-x-1/2 lg:left-40 lg:translate-x-0 z-30 flex items-center">
+    <img src="/logo-ocr.png" alt="logo" className="h-7 w-auto" />
+  </div>
       {/* ✅ VIDEO BACKGROUND */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <video
@@ -27,10 +30,13 @@ export function HeroSection() {
 
       {/* ✅ CENTERED CONTENT ONLY */}
       <div className="relative z-20 text-center sm:px-6 lg:px-8 max-w-4xl mx-auto mt-20">
-        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full bg-white/20 border border-white/30 animate-fade-in-up text-sm text-white">
+      <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full 
+    bg-gradient-to-r from-[#A52785] via-[#C62955] to-[#AD0C49]
+ animate-fade-in-up text-sm text-white">
   <Zap className="w-3.5 h-3.5 text-white" />
   <p className="font-sm">AI-Powered Note Conversion</p>
 </div>
+
 
 
         <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight mb-4 animate-fade-in-up text-white">
