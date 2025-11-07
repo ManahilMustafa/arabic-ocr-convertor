@@ -48,21 +48,21 @@ export function HeroSection() {
           Upload your handwritten notes, instantly convert them to editable text, and export as PDF or Word documents
           with beautiful formatting.
         </p>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto px-4 animate-fade-in-up">
+  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
+    <BookOpen className="w-6 h-6 mx-auto mb-2" />
+    <p className="text-sm font-medium">Upload & Convert</p>
+  </div>
+  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
+    <Zap className="w-6 h-6 mx-auto mb-2" />
+    <p className="text-sm font-medium">AI Processing</p>
+  </div>
+  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
+    <Download className="w-6 h-6 mx-auto mb-2" />
+    <p className="text-sm font-medium">Export Instantly</p>
+  </div>
+</div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto animate-fade-in-up">
-          <div className="p-4 rounded-lg bg-white/20 border border-white/30 animate-fade-in-up text-sm text-white transition-smooth">
-            <BookOpen className="w-5 h-5 text-[#ffff] mx-auto mb-2" />
-            <p className="text-sm font-medium">Upload & Convert</p>
-          </div>
-          <div className="p-4 rounded-lg bg-white/20 border border-white/30 animate-fade-in-up text-sm text-white transition-smooth">
-            <Zap className="w-5 h-5 text-[#ffff] mx-auto mb-2" />
-            <p className="text-sm font-medium">AI Processing</p>
-          </div>
-          <div className="p-4 rounded-lg bg-white/20 border border-white/30 animate-fade-in-up text-sm text-white transition-smooth">
-            <Download className="w-5 h-5 text-[#ffff] mx-auto mb-2" />
-            <p className="text-sm font-medium">Export Instantly</p>
-          </div>
-        </div>
       </div>
 
       {/* ✅ FULL WIDTH CONVERSION SECTION */}
