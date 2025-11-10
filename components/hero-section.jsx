@@ -41,7 +41,7 @@ export function HeroSection() {
 
         <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight mb-4 animate-fade-in-up text-white">
           Transform Handwritten <br />
-          <span className="text-white">Notes to Digital</span>
+          <span className="text-white">Arabic Notes to Digital</span>
         </h1>
 
         <p className="text-base sm:text-md text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
