@@ -73,10 +73,18 @@ export function ConversionSection() {
   }
 
   const handleRemoveImage = (id) => {
-    setImages((prev) => prev.filter((img) => img.id !== id))
-    if (selectedImageId === id) {
-      setSelectedImageId(images.find((img) => img.id !== id)?.id || null)
-    }
+    setImages((prev) => {
+      const updatedImages = prev.filter((img) => img.id !== id)
+
+      if (updatedImages.length === 0) {
+        setShowConvertedSection(false)
+        setSelectedImageId(null)
+      } else if (selectedImageId === id) {
+        setSelectedImageId(updatedImages[0]?.id ?? null)
+      }
+
+      return updatedImages
+    })
   }
 
   const handleEdit = (id) => {
@@ -211,12 +219,12 @@ export function ConversionSection() {
             {selectedImage ? (
               <div className="space-y-4">
                 {selectedImage.isConverting ? (
-                  <div className="space-y-2">
+                  <div className="space-y-2 max-w-2xl mx-auto">
                     <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
                       <Loader className="w-3.5 h-3.5 text-[#c82949] animate-spin" />
                       Converting...
                     </p>
-                    <Card className="p-6 bg-muted/30 border border-[#c82949] h-40 flex items-center justify-center">
+                    <Card className="p-6 bg-muted/30 border border-[#c82949] h-40 flex items-center justify-center max-w-2xl mx-auto">
                       <div className="text-center">
                         <div className="w-6 h-6 border-2 border-[#c82949]/20 border-t-[#c82949] rounded-full animate-spin mx-auto mb-2" />
                         <p className="text-xs text-muted-foreground">OCR in progress...</p>
@@ -340,7 +348,7 @@ export function ConversionSection() {
                 )}
               </div>
             ) : (
-              <Card className="p-4 bg-muted/30 border border-border min-h-32 max-h-[600px] resize-y overflow-auto">
+              <Card className="p-4 bg-muted/30 border border-border min-h-32 max-h-[600px] resize-y overflow-auto max-w-2xl mx-auto">
                 <p className="text-xs text-muted-foreground">
                   Upload started — conversion in progress...
                 </p>
