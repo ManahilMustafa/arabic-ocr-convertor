@@ -1,75 +1,165 @@
 "use client"
 
-import { Zap, BookOpen, Download } from "lucide-react"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { Zap, BookOpen, Download, ArrowRight } from "lucide-react"
 import { ConversionSection } from "./conversion-section"
 
+if (typeof window !== "undefined" && !gsap.core.globals().ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 export function HeroSection() {
+  const heroRef = useRef(null)
+  const badgeRef = useRef(null)
+  const headingRef = useRef(null)
+  const descriptionRef = useRef(null)
+  const cardRefs = useRef([])
+  const conversionRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-nav", {
+        y: -20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+
+      gsap.from([badgeRef.current, headingRef.current, descriptionRef.current], {
+        opacity: 0,
+        y: 30,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.15,
+        delay: 0.2,
+      })
+
+      gsap.from(cardRefs.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.12,
+        delay: 0.5,
+      })
+
+      if (conversionRef.current) {
+        gsap.from(conversionRef.current, {
+          opacity: 0,
+          y: 60,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: conversionRef.current,
+            start: "top 85%",
+          },
+        })
+      }
+    }, heroRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-background pt-20 pb-20">
- {/* ✅ LOGO - CENTER ON MOBILE */}
-  <div className="absolute top-6 left-1/2 -translate-x-1/2 lg:left-40 lg:translate-x-0 z-30 flex items-center">
-    <img src="/logo-ocr.png" alt="logo" className="h-7 w-auto" />
-  </div>
-      {/* ✅ VIDEO BACKGROUND */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          ref={(video) => { if(video) video.playbackRate = 0.5; }}
-        >
-          <source src="/person.mp4" type="video/mp4" />
-        </video>
-
-        {/* ✅ OVERLAY TO DIM VIDEO */}
-        <div className="absolute inset-0 bg-black/60 pointer-events-none" />
-
+    <section ref={heroRef} className="relative w-full min-h-screen overflow-hidden ">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 " />
+        <div className="absolute inset-0 bg-[url('/Header.png')] bg-cover bg-center " />
       </div>
 
-      {/* ✅ CENTERED CONTENT ONLY */}
-      <div className="relative z-20 text-center sm:px-6 lg:px-8 max-w-4xl mx-auto mt-20">
-      <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full 
-    bg-gradient-to-r from-[#A52785] via-[#C62955] to-[#AD0C49]
- animate-fade-in-up text-sm text-white">
-  <Zap className="w-3.5 h-3.5 text-white" />
-  <p className="font-sm">AI-Powered Note Conversion</p>
-</div>
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 lg:pt-6">
+        {/* Navigation */}
+        <div className="hero-nav flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="logo" className="h-10 w-auto" />
+            <div className="hidden sm:flex flex-col leading-tight text-slate-700">
+             
+            </div>
+          </div>
 
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <a href="#how-it-works" className="hover:text-[#0c7fd7] transition-colors">
+              How it works
+            </a>
+            <a href="#features" className="hover:text-[#0c7fd7] transition-colors">
+              Features
+            </a>
+            <a href="#pricing" className="hover:text-[#0c7fd7] transition-colors">
+              Pricing
+            </a>
+          </nav>
 
+          <button className="inline-flex items-center gap-2 rounded-full bg-[#2584F4] px-6 py-2 text-white text-sm font-semibold ">
+            Login
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight mb-4 animate-fade-in-up text-white">
-          Transform Handwritten <br />
-          <span className="text-white">Arabic Notes to Digital</span>
-        </h1>
+        {/* Hero copy */}
+        <div className="mt-12 text-center">
+          <div
+            ref={badgeRef}
+            className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-[#0c98ff] to-[#0cd7b2] px-5 py-2 text-xs font-semibold text-white "
+          >
+            <Zap className="w-4 h-4" />
+            AI-Powered Note Conversion
+          </div>
 
-        <p className="text-base sm:text-md text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
-          Upload your handwritten notes, instantly convert them to editable text, and export as PDF or Word documents
-          with beautiful formatting.
-        </p>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl mx-auto px-4 animate-fade-in-up">
-  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
-    <BookOpen className="w-6 h-6 mx-auto mb-2" />
-    <p className="text-sm font-medium">Upload & Convert</p>
-  </div>
-  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
-    <Zap className="w-6 h-6 mx-auto mb-2" />
-    <p className="text-sm font-medium">AI Processing</p>
-  </div>
-  <div className="p-6 rounded-lg bg-white/20 border border-white/30 text-white text-center transition-transform hover:scale-105">
-    <Download className="w-6 h-6 mx-auto mb-2" />
-    <p className="text-sm font-medium">Export Instantly</p>
-  </div>
-</div>
+          <h1
+            ref={headingRef}
+            className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900"
+          >
+            Transform <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0c7fd7] to-[#00cfc8]">Handwritten</span>
+            <br />
+            Arabic Notes to <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00cfc8] to-[#0a8bff]">Digital</span>
+          </h1>
 
+          <p
+            ref={descriptionRef}
+            className="mt-4 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed"
+          >
+            Upload your handwritten notes, instantly convert them to editable text, and export as PDF or Word documents
+            with beautiful formatting.
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-slate-700 text-sm font-medium">
+            <div
+              ref={(el) => (cardRefs.current[0] = el)}
+              className="flex w-full max-w-[200px] flex-col items-center rounded-2xl bg-white/80 border border-white/60 px-5 py-4 "
+            >
+              <div className="mb-2 flex h-8 w-8 items-center justify-center text-[#1177E5]">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <p className="text-sm font-semibold">Upload & Convert</p>
+            </div>
+            <div
+              ref={(el) => (cardRefs.current[1] = el)}
+              className="flex w-full max-w-[200px] flex-col items-center rounded-2xl bg-white/80 border border-white/60 px-5 py-4"
+            >
+              <div className="mb-2 flex h-8 w-8 items-center justify-center text-[#1177E5]">
+                <Zap className="w-5 h-5" />
+              </div>
+              <p className="text-sm font-semibold">AI Processing</p>
+            </div>
+            <div
+              ref={(el) => (cardRefs.current[2] = el)}
+              className="flex w-full max-w-[200px] flex-col items-center rounded-2xl bg-white/80 border border-white/60 px-5 py-4"
+            >
+              <div className="mb-2 flex h-8 w-8 items-center justify-center text-[#1177E5]">
+                <Download className="w-5 h-5" />
+              </div>
+              <p className="text-sm font-semibold">Export Instantly</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* ✅ FULL WIDTH CONVERSION SECTION */}
-      <div className="relative z-20 w-full mt-0">
+      {/* Conversion section */}
+      <div ref={conversionRef} className="relative z-20 w-full mt-1">
         <ConversionSection />
       </div>
-
     </section>
   )
 }

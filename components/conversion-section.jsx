@@ -8,6 +8,7 @@ import { Upload, X, Copy, Check, FileText, Edit2, Download, Loader } from "lucid
 import { TextEditor } from "./text-editor"
 import { TypingAnimation } from "./typing-animation"
 import { generatePDF, generateDOCX } from "@/lib/export-utils"
+import { extractArabicText } from "@/api/ocr"
 
 export function ConversionSection() {
   const [images, setImages] = useState([])
@@ -19,6 +20,37 @@ export function ConversionSection() {
   const fileInputRef = useRef(null)
 
   const selectedImage = images.find((img) => img.id === selectedImageId)
+
+  const processImageWithAPI = async (imageId, file) => {
+    try {
+      const extractedText = await extractArabicText(file)
+      const finalText = extractedText?.trim()
+        ? extractedText
+        : "No Arabic text detected. Try another image."
+      setImages((prev) =>
+        prev.map((img) =>
+          img.id === imageId
+            ? { ...img, isConverting: false, text: finalText, editedText: finalText }
+            : img
+        )
+      )
+      setSelectedImageId(imageId)
+    } catch (error) {
+      console.error("OCR error:", error)
+      setImages((prev) =>
+        prev.map((img) =>
+          img.id === imageId
+            ? {
+                ...img,
+                isConverting: false,
+                text: "Unable to process image. Please try again.",
+                editedText: "Unable to process image. Please try again.",
+              }
+            : img
+        )
+      )
+    }
+  }
 
   const handleFileUpload = (e) => {
     const files = e.target.files
@@ -45,24 +77,7 @@ export function ConversionSection() {
         }
 
         setImages((prev) => [...prev, newImage])
-
-        setTimeout(() => {
-          const mockTexts = [
-            "The quick brown fox jumps over the lazy dog.\nHandwritten notes are now digital!\nEnjoy the seamless conversion experience.",
-            "Important meeting notes:\n- Project deadline: Next Friday\n- Team sync at 2 PM\n- Budget review completed",
-            "Shopping list:\n- Milk and eggs\n- Fresh vegetables\n- Bread and butter\n- Coffee beans",
-          ]
-          const randomText = mockTexts[Math.floor(Math.random() * mockTexts.length)]
-
-          setImages((prev) =>
-            prev.map((img) =>
-              img.id === id
-                ? { ...img, isConverting: false, text: randomText, editedText: randomText }
-                : img
-            )
-          )
-          setSelectedImageId(id)
-        }, 2500)
+        processImageWithAPI(id, file)
       }
       reader.readAsDataURL(file)
     })
@@ -149,12 +164,15 @@ export function ConversionSection() {
       
 <div className="w-full mb-6">
   <div className="flex items-center justify-center">
-    <div className="flex items-center w-full max-w-2xl bg-white rounded-full border border-[#c82949] px-4 h-12 shadow-sm justify-between">
+    <div className="flex items-center w-full max-w-2xl bg-white rounded-full border border-[#B8ECFF] px-4 h-12  justify-between">
 
       {/* Hidden File Input */}
       <Input
         ref={fileInputRef}
-        type="file"
+        type=
+        
+        
+        "file"
         multiple
         accept="image/*"
         onChange={handleFileUpload}
@@ -169,7 +187,7 @@ export function ConversionSection() {
       {/* ✅ Right Side Upload Button */}
       <button
         onClick={() => fileInputRef.current?.click()}
-        className="flex items-center gap-1 bg-[#c82949] text-white text-xs font-medium px-4 py-2 rounded-full hover:opacity-90 transition"
+        className="flex items-center gap-1 bg-linear-to-r from-[#0c98ff] to-[#0cd7b2]  text-white text-xs font-medium px-4 py-2 rounded-full hover:opacity-90 transition"
       >
         <Upload className="w-4 h-4" />
         Upload
@@ -190,8 +208,8 @@ export function ConversionSection() {
         onClick={() => setSelectedImageId(img.id)}
         className={`flex items-center gap-2 px-3 py-1.5 border rounded-full text-xs cursor-pointer transition ${
           selectedImageId === img.id
-            ? "border-[#c82949] bg-[#c82949]/10 text-white"
-            : "border-gray-300 bg-white hover:bg-gray-50"
+            ? "border-[#1177E5] bg-[#1177E5]/10 text-black"
+            : "border-gray-300 bg-black hover:bg-gray-50"
         }`}
       >
         <img src={img.preview} className="w-5 h-5 rounded-full object-cover" />
@@ -202,7 +220,7 @@ export function ConversionSection() {
             e.stopPropagation()
             handleRemoveImage(img.id)
           }}
-          className="text-gray-500 hover:text-red-500"
+          className="text-gray-500 hover:text-[#1177E5]"
         >
           <X className="w-3 h-3" />
         </button>
@@ -220,14 +238,14 @@ export function ConversionSection() {
               <div className="space-y-4">
                 {selectedImage.isConverting ? (
                   <div className="space-y-2 max-w-2xl mx-auto">
-                    <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                      <Loader className="w-3.5 h-3.5 text-[#c82949] animate-spin" />
+                    <p className="text-xs font-medium text-black flex items-center gap-1.5">
+                      <Loader className="w-3.5 h-3.5 text-[#1177E5] animate-spin" />
                       Converting...
                     </p>
-                    <Card className="p-6 bg-muted/30 border border-[#c82949] h-40 flex items-center justify-center max-w-2xl mx-auto">
+                    <Card className="p-6 bg-muted/30 border border-[#1177E5] h-40 flex items-center justify-center max-w-2xl mx-auto">
                       <div className="text-center">
-                        <div className="w-6 h-6 border-2 border-[#c82949]/20 border-t-[#c82949] rounded-full animate-spin mx-auto mb-2" />
-                        <p className="text-xs text-muted-foreground">OCR in progress...</p>
+                        <div className="w-6 h-6 border-2 border-[#1177E5]/20 border-t-[#1177E5] rounded-full animate-spin mx-auto mb-2" />
+                        <p className="text-xs text-black">OCR in progress...</p>
                       </div>
                     </Card>
                   </div>
@@ -235,12 +253,12 @@ export function ConversionSection() {
                   <>
                     {selectedImage.isEditing ? (
                       <div className="space-y-2">
-                        <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                        <p className="text-xs font-medium text-muted-black flex items-center gap-1.5">
                           <Edit2 className="w-3.5 h-3.5" />
                           Edit Text
                         </p>
                         <TextEditor
-                          value={selectedImage.editedText}
+                          value={selectedImage.editedText ?? ""}
                           onChange={(text) => handleUpdateEditedText(selectedImage.id, text)}
                         />
 
@@ -248,7 +266,7 @@ export function ConversionSection() {
                           <Button
                             size="sm"
                             onClick={() => handleSaveEdit(selectedImage.id)}
-                            className="flex-1 gap-2 text-xs h-9 bg-[#c82949] text-white hover:bg-muted hover:text-black"
+                            className="flex-1 gap-2 text-xs h-9 bg-[#1177E5] text-white hover:bg-muted hover:text-black"
                           >
                             <Check className="w-3.5 h-3.5" />
                             Save Changes
@@ -257,7 +275,7 @@ export function ConversionSection() {
                             size="sm"
                             variant="outline"
                             onClick={() => handleCancelEdit(selectedImage.id)}
-                            className="flex-1 text-xs h-9 hover:bg-[#c82949]"
+                            className="flex-1 text-xs h-9 hover:bg-[#1177E5]"
                           >
                             Cancel
                           </Button>
@@ -267,10 +285,10 @@ export function ConversionSection() {
                       <>
                         <div className="space-y-2">
                         
-                         <Card className="p-4 bg-muted/30 border border-white/30 min-h-32 max-h-72 resize-y overflow-auto max-w-2xl mx-auto bg-white/20 ">
+                         <Card className="p-4 border border-white/30 min-h-32 max-h-72 resize-y overflow-auto max-w-2xl mx-auto bg-white shadow-none ">
 
                             {selectedImage.text ? (
-                              <TypingAnimation text={selectedImage.text} />
+                              <TypingAnimation text={selectedImage.text ?? ""} />
                             ) : (
                               <p className="text-xs text-muted-foreground">
                                 No image selected — converted text will appear here.
@@ -285,16 +303,16 @@ export function ConversionSection() {
                             size="sm"
                             variant="outline"
                             onClick={handleCopyText}
-                            className="flex-1 gap-1.5 text-xs h-9 bg-white hover:bg-muted hover:text-black"
+                            className="flex-1 gap-1.5 text-xs h-9 bg-white hover:bg-muted hover:text-black shadow-none"
                           >
                             {copied ? (
                               <>
-                                <Check className="w-3.5 h-3.5 text-[#c82949]" />
+                                <Check className="w-3.5 h-3.5 text-[#1177E5]" />
                                 Copied
                               </>
                             ) : (
                               <>
-                                <Copy className="w-3.5 h-3.5 text-[#c82949]" />
+                                <Copy className="w-3.5 h-3.5 text-[#1177E5]" />
                                 Copy
                               </>
                             )}
@@ -304,9 +322,9 @@ export function ConversionSection() {
                             size="sm"
                             variant="outline"
                             onClick={() => handleEdit(selectedImage.id)}
-                            className="flex-1 gap-1.5 text-xs h-9 bg-white hover:bg-muted hover:text-black"
+                            className="flex-1 gap-1.5 text-xs h-9 bg-white hover:bg-muted hover:text-black shadow-none"
                           >
-                            <Edit2 className="w-3.5 h-3.5  text-[#c82949]" />
+                            <Edit2 className="w-3.5 h-3.5  text-[#1177E5]" />
                             Edit
                           </Button>
 
@@ -314,14 +332,14 @@ export function ConversionSection() {
                             <Button
                               size="sm"
                               onClick={() => setShowExportOptions(!showExportOptions)}
-                              className="gap-1.5 text-xs h-9 px-3 bg-[#c82949] hover:bg-muted hover:text-black"
+                              className="gap-1.5 text-xs h-9 px-3 bg-[#1177E5] hover:bg-muted hover:text-black"
                             >
                               <Download className="w-3.5 h-3.5" />
                               Export
                             </Button>
 
                             {showExportOptions && (
-                              <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg z-10 overflow-hidden min-w-40">
+                              <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg  z-10 overflow-hidden min-w-40">
                                 <button
                                   onClick={() => handleExport("pdf")}
                                   disabled={isExporting}

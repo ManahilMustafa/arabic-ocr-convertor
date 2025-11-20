@@ -56,28 +56,20 @@ export default function CounterSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          src="/Frame.png"
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-      
-      </div>
+    <section ref={sectionRef} className="relative w-full bg-white">
+   
 
       {/* Counter Content */}
-      <div className="relative z-10 max-w-6xl mx-auto py-24 sm:py-32 px-4 flex flex-col sm:flex-row justify-between items-center gap-10 sm:gap-0">
+      <div className="relative z-10 max-w-6xl mx-auto py-24 sm:py-32 px-4 flex flex-col sm:flex-row items-center gap-10 sm:gap-0">
         {counters.map((item, idx) => (
           <div
             key={idx}
             className="text-center sm:text-left flex-1"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-5xl font-bold text-white">
+            <h2 className="text-4xl sm:text-5xl md:text-5xl font-bold text-[#2C65B3]">
               <AnimatedCounter target={item.target} suffix={item.suffix} trigger={trigger} />
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-white/90">{item.label}</p>
+            <p className="mt-2 text-sm sm:text-base text-black/90">{item.label}</p>
           </div>
         ))}
       </div>

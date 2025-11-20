@@ -15,7 +15,7 @@ export function TextEditor({ value, onChange }) {
       className={cn(
         "w-full h-32 p-4 rounded-lg border-2 bg-background/50 resize-none font-medium",
         "transition-all outline-none focus:ring-2 focus:ring-offset-2",
-        isFocused ? "border-[#c82949] focus:ring-[#c82949]/50" : "border-border"
+        isFocused ? "border-[#1177E5] focus:ring-[#1177E5]/50" : "border-border"
       )}
       placeholder="Edit your converted text here..."
     />

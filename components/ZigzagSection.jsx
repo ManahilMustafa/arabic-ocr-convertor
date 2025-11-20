@@ -1,83 +1,66 @@
-// components/ZigzagSection.jsx
-import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image"
+import { Star } from "lucide-react"
+import reviewImg from "@/public/woman.png"
+import aiExportImg from "@/public/pricing.png"
 
-function ZigzagItem({ heading, subheading, imgSrc, reverse }) {
-  const ref = useRef();
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`flex flex-col ${reverse ? "flex-col-reverse md:flex-row-reverse" : "md:flex-row"} items-center max-w-6xl mx-auto py-8 md:py-12 px-4 md:px-0`}
-    >
-      {/* Text */}
-      <div
-        className={`w-full md:w-1/2 transition-all duration-700 ${
-          inView
-            ? "opacity-100 translate-x-0"
-            : reverse
-            ? "opacity-0 translate-x-6 md:translate-x-12"
-            : "opacity-0 -translate-x-6 md:-translate-x-12"
-        } mb-6 md:mb-0 md:pr-6 md:pl-6`}
-      >
-        <h2 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4 text-gray-900">{heading}</h2>
-        <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{subheading}</p>
-      </div>
-
-      {/* Image */}
-      <div
-        className={`w-full md:w-1/2 transition-all duration-700 ${
-          inView
-            ? "opacity-100 translate-x-0"
-            : reverse
-            ? "opacity-0 -translate-x-6 md:-translate-x-12"
-            : "opacity-0 translate-x-6 md:translate-x-12"
-        }`}
-      >
-        <img src={imgSrc} alt={heading} className="rounded-lg w-full h-auto object-cover" />
-      </div>
-    </div>
-  );
-}
+const perfectForItems = [
+  "Students organizing notes",
+  "Professionals digitizing meetings",
+  "Researchers archiving fieldwork",
+  "Teams sharing handwritten ideas",
+  "Personal note backup",
+  "Document organization",
+]
 
 export function ZigzagSection() {
-  const sections = [
-    {
-      heading: "How Arabic OCR Works",
-      subheading:
-        "Arabic OCR (Optical Character Recognition) uses advanced AI technology to read, understand, and convert handwritten or printed Arabic text into digital, editable content. Transkribus can be trained on historical manuscripts, modern handwritten notes, and scanned documents, making it highly accurate for different writing styles. The Universal Arabic model has been trained on millions of words from various Arabic scripts, allowing it to recognize different calligraphic styles, handwriting patterns, and complex letter shapes with impressive accuracy.",
-      imgSrc: "/editor.jpg",
-    },
-    {
-      heading: "Understanding Arabic Handwriting",
-      subheading:
-        "Arabic handwriting comes in many styles—such as Naskh, Ruq'ah, Diwani, and Thuluth—each with unique shapes and stroke patterns. Unlike English, Arabic letters change form depending on their position in a word and are written right-to-left, with added diacritics for pronunciation. Because of these complexities, Arabic OCR systems must be highly intelligent to accurately read and convert handwritten text. With Transkribus, both historical manuscripts and modern handwritten Arabic notes can be digitized efficiently—preserving accuracy, style, and making the text fully searchable and editable.",
-      imgSrc: "/editor.jpg",
-    },
-  ];
-
   return (
-    <div className="space-y-12 md:space-y-20 bg-[#f9f9fa]">
-      {sections.map((item, index) => (
-        <ZigzagItem
-          key={index}
-          heading={item.heading}
-          subheading={item.subheading}
-          imgSrc={item.imgSrc}
-          reverse={index % 2 !== 0}
-        />
-      ))}
-    </div>
-  );
+    <section className="relative w-full py-20 overflow-hidden bg-white">
+      <div className="absolute inset-0 " />
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Perfect For */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+           
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Perfect For</h2>
+            <p className="text-slate-500 text-sm sm:text-base mt-3 max-w-lg">
+              Highlight the people who benefit most from your Arabic OCR workflow.
+            </p>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {perfectForItems.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <Star className="mt-1 h-4 w-4 text-[#1177E5] fill-[#1177E5] shrink-0" />
+                  <span className="text-slate-700 text-sm sm:text-base">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative flex justify-center">
+         
+            <div className="relative rounded-[32px] p-4">
+              <Image src={reviewImg} alt="Happy customer" />
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Image */}
+        <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 className="text-3xl sm:text-4xl font-bold text-slate-900">
+              Boost your productivity with advanced Arabic OCR performance.
+            </h3>
+            <p className="text-slate-500 text-sm sm:text-base mt-5">
+              Ideal for students, researchers, and small teams. Process images, PDFs, and documents instantly with
+              reliable OCR accuracy tailored specifically to Arabic scripts.
+            </p>
+          </div>
+          <div className="relative flex justify-center lg:justify-end">
+           
+            <div className="relative overflow-hidden">
+              <Image src={aiExportImg} alt="Arabic OCR dashboard preview" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }

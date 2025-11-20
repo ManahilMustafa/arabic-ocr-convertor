@@ -1,13 +1,14 @@
 export function Footer() {
   return (
-    <footer className="w-full border-t border-border bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="relative w-full bg-background bg-[url('/bg-grd.png')] bg-cover bg-center overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 -top-16 h-20 bg-linear-to-b from-white via-white/95 to-transparent" />
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Footer Top */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           {/* Logo & Description */}
           <div>
             <img 
-              src="/black-logo.png" 
+              src="/logo.png" 
               alt="Alif OCR Logo" 
               className="h-8 w-auto mb-4"
             />
@@ -79,7 +80,7 @@ export function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="pt-8 border-t border-border">
+        <div className="pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground gap-2">
             <p>© 2025 Alif OCR. All rights reserved.</p>
             <p>Powered by Cplus Soft</p>
